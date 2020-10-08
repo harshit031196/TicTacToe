@@ -76,7 +76,7 @@ public class TicTacToeGame {
 		}
 		return turn;
 	}
-	public static void checkWin(char[] board, char computerOption, char playerOption,boolean flag) {
+	public static boolean checkWin(char[] board, char computerOption, char playerOption) {
 		if((board[1]==playerOption&&board[2]==playerOption&&board[3]==playerOption)
 				||(board[4]==playerOption&&board[5]==playerOption&&board[6]==playerOption)
 				||(board[7]==playerOption&&board[8]==playerOption&&board[9]==playerOption)
@@ -86,7 +86,7 @@ public class TicTacToeGame {
 				||(board[1]==playerOption&&board[5]==playerOption&&board[9]==playerOption)
 				||(board[3]==playerOption&&board[5]==playerOption&&board[7]==playerOption)) {
 			System.out.println("Player won the game");
-			flag=false;
+			return false;
 		}
 		else if((board[1]==computerOption&&board[2]==computerOption&&board[3]==computerOption)
 				||(board[4]==computerOption&&board[5]==computerOption&&board[6]==computerOption)
@@ -97,8 +97,9 @@ public class TicTacToeGame {
 				||(board[1]==computerOption&&board[5]==computerOption&&board[9]==computerOption)
 				||(board[3]==computerOption&&board[5]==computerOption&&board[7]==computerOption)) {
 			System.out.println("Computer won the game");
-			flag=false;
+			return false;
 		}
+		return true;
 	}
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
@@ -127,20 +128,18 @@ public class TicTacToeGame {
 		int turn=start;
 		
 		for(int i=0;i<9;i++) {
-			if(turn==playerTurn&&flag) {
+			if(turn==playerTurn) {
 				checkIndex(newBoard,playerOption);
-				checkWin(newBoard,computerOption, playerOption, flag);
 				showBoard(newBoard);
+				if(!checkWin(newBoard,computerOption, playerOption))break;
 				turn++;
 				turn%=2;
-			}else if(turn==computerTurn&&flag) {
+			}else if(turn==computerTurn) {
 				checkIndex(newBoard,computerOption);
-				checkWin(newBoard,computerOption, playerOption, flag);
 				showBoard(newBoard);
+				if(!checkWin(newBoard,computerOption, playerOption))break;
 				turn++;
 				turn%=2;
-			}else {
-				break;
 			}
 		}
 	}
