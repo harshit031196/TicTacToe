@@ -31,16 +31,21 @@ public class TicTacToeGame {
 		System.out.println(board[7]+"|"+board[8]+"|"+board[9]);
 	}
 	
-	public static void checkIndex(char[] board) {
+	/**
+	 * @param board
+	 * @param Option
+	 */
+	public static void checkIndex(char[] board,char Option) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the index you want to enter the value at");
-		int index=sc.nextInt();
 		boolean flag=true;
 		while(flag) {
+			System.out.println("Please enter the index you want to enter the value at");
+			int index=sc.nextInt();
 			if(index>0&&index<10) {
 				if(board[index]==' ') {
-					System.out.println("The change can be made");
+					board[index]=Option;
 					flag=false;
+					System.out.println("The value :" +Option+ "has been added to the position :"+index);
 				}else {
 					System.out.println("The position is already filled. Please enter a new position");
 				}
@@ -70,8 +75,9 @@ public class TicTacToeGame {
 		}
 		System.out.println("This is how current board looks like");
 		showBoard(newBoard);
-		
-		checkIndex(newBoard);
-		
+		checkIndex(newBoard,playerOption);
+		showBoard(newBoard);
+		checkIndex(newBoard,computerOption);
+		showBoard(newBoard);
 	}
 }
