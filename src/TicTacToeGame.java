@@ -1,9 +1,10 @@
 import java.util.Scanner;
-
 public class TicTacToeGame {
 	/**
 	 * @return
 	 */
+	final private static int playerTurn=0;
+	final private static int computerTurn = 1;
 	public static char[] makeBoard(){
 		char[] board = new char[10];
 		for(int i=0;i<10;i++) {
@@ -30,7 +31,6 @@ public class TicTacToeGame {
 		System.out.println("_____");
 		System.out.println(board[7]+"|"+board[8]+"|"+board[9]);
 	}
-	
 	/**
 	 * @param board
 	 * @param Option
@@ -53,6 +53,9 @@ public class TicTacToeGame {
 				System.out.println("The index is not valid. Please enter a valid index");
 			}
 		}
+	}
+	public static int playFirst() {
+		return (int)(Math.random()*10)%2;
 	}
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
@@ -79,5 +82,11 @@ public class TicTacToeGame {
 		showBoard(newBoard);
 		checkIndex(newBoard,computerOption);
 		showBoard(newBoard);
+		switch(playFirst()) {
+		case playerTurn:
+			System.out.println("Player will start the game");
+		case computerTurn:
+			System.out.println("Computer will start the game");
+		}
 	}
 }
