@@ -5,6 +5,11 @@ public class TicTacToeGame {
 	 */
 	final private static int playerTurn=0;
 	final private static int computerTurn = 1;
+	static boolean flag=true;
+	/**
+	 * @return
+	 * Makes the board to play on
+	 */
 	public static char[] makeBoard(){
 		char[] board = new char[10];
 		for(int i=0;i<10;i++) {
@@ -14,6 +19,7 @@ public class TicTacToeGame {
 	}
 	/**
 	 * @return
+	 * Lets the player choose the symbol between X and O
 	 */
 	public static char chooseOption() {
 		Scanner sc = new Scanner(System.in);
@@ -23,6 +29,7 @@ public class TicTacToeGame {
 	}
 	/**
 	 * @param board
+	 * It shows the current board with all the values
 	 */
 	public static void showBoard(char[] board){
 		System.out.println(board[1]+"|"+board[2]+"|"+board[3]);
@@ -34,6 +41,7 @@ public class TicTacToeGame {
 	/**
 	 * @param board
 	 * @param Option
+	 * Will ask the user for an input and check if the input is valid or not. If valid, it will update the board corresponding to the input. 
 	 */
 	public static void checkIndex(char[] board,char Option) {
 		Scanner sc = new Scanner(System.in);
@@ -54,8 +62,43 @@ public class TicTacToeGame {
 			}
 		}
 	}
+	/**
+	 * @return
+	 * Returns who will play first. Will it be the player or the computer?
+	 */
 	public static int playFirst() {
-		return (int)(Math.random()*10)%2;
+		int turn=(int)(Math.random()*10)%2;
+		if(turn==playerTurn) {
+			System.out.println("Player won the toss. Player will play first");
+		}
+		else {
+			System.out.println("Computer won the toss. Computer will play first");
+		}
+		return turn;
+	}
+	public static void checkWin(char[] board, char computerOption, char playerOption,boolean flag) {
+		if((board[1]==playerOption&&board[2]==playerOption&&board[3]==playerOption)
+				||(board[4]==playerOption&&board[5]==playerOption&&board[6]==playerOption)
+				||(board[7]==playerOption&&board[8]==playerOption&&board[9]==playerOption)
+				||(board[1]==playerOption&&board[4]==playerOption&&board[7]==playerOption)
+				||(board[2]==playerOption&&board[5]==playerOption&&board[8]==playerOption)
+				||(board[3]==playerOption&&board[6]==playerOption&&board[9]==playerOption)
+				||(board[1]==playerOption&&board[5]==playerOption&&board[9]==playerOption)
+				||(board[3]==playerOption&&board[5]==playerOption&&board[7]==playerOption)) {
+			System.out.println("Player won the game");
+			flag=false;
+		}
+		else if((board[1]==computerOption&&board[2]==computerOption&&board[3]==computerOption)
+				||(board[4]==computerOption&&board[5]==computerOption&&board[6]==computerOption)
+				||(board[7]==computerOption&&board[8]==computerOption&&board[9]==computerOption)
+				||(board[1]==computerOption&&board[4]==computerOption&&board[7]==computerOption)
+				||(board[2]==computerOption&&board[5]==computerOption&&board[8]==computerOption)
+				||(board[3]==computerOption&&board[6]==computerOption&&board[9]==computerOption)
+				||(board[1]==computerOption&&board[5]==computerOption&&board[9]==computerOption)
+				||(board[3]==computerOption&&board[5]==computerOption&&board[7]==computerOption)) {
+			System.out.println("Computer won the game");
+			flag=false;
+		}
 	}
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
@@ -78,15 +121,27 @@ public class TicTacToeGame {
 		}
 		System.out.println("This is how current board looks like");
 		showBoard(newBoard);
-		checkIndex(newBoard,playerOption);
-		showBoard(newBoard);
-		checkIndex(newBoard,computerOption);
-		showBoard(newBoard);
-		switch(playFirst()) {
-		case playerTurn:
-			System.out.println("Player will start the game");
-		case computerTurn:
-			System.out.println("Computer will start the game");
+//		checkIndex(newBoard,playerOption);
+//		showBoard(newBoard);
+		int start=playFirst();
+		int turn=start;
+		
+		for(int i=0;i<9;i++) {
+			if(turn==playerTurn&&flag) {
+				checkIndex(newBoard,playerOption);
+				checkWin(newBoard,computerOption, playerOption, flag);
+				showBoard(newBoard);
+				turn++;
+				turn%=2;
+			}else if(turn==computerTurn&&flag) {
+				checkIndex(newBoard,computerOption);
+				checkWin(newBoard,computerOption, playerOption, flag);
+				showBoard(newBoard);
+				turn++;
+				turn%=2;
+			}else {
+				break;
+			}
 		}
 	}
 }
