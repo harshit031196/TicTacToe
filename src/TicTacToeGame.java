@@ -1,30 +1,57 @@
 import java.util.Scanner;
 
 public class TicTacToeGame {
-	public static char[][] makeBoard(){
-		char[][] board = new char[3][3];
-		for(int i=0;i<3;i++) {
-			for(int j=0;j<3;j++) {
-				board[i][j]=' ';
-			}
+	/**
+	 * @return
+	 */
+	public static char[] makeBoard(){
+		char[] board = new char[10];
+		for(int i=0;i<10;i++) {
+			board[i]=' ';
 		}
 		return board;
 	}
+	/**
+	 * @return
+	 */
 	public static char chooseOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please choose between X and O");
 		char c = sc.next().charAt(0);
 		return c;
 	}
-	public static void showBoard(char[][] board){
-		for(int i=0;i<3;i++) {
-			System.out.println(board[i][0]+"|"+board[i][2]+"|"+board[i][2]);
-			System.out.println("_____");
+	/**
+	 * @param board
+	 */
+	public static void showBoard(char[] board){
+		System.out.println(board[1]+"|"+board[2]+"|"+board[3]);
+		System.out.println("_____");
+		System.out.println(board[4]+"|"+board[5]+"|"+board[6]);
+		System.out.println("_____");
+		System.out.println(board[7]+"|"+board[8]+"|"+board[9]);
+	}
+	
+	public static void checkIndex(char[] board) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the index you want to enter the value at");
+		int index=sc.nextInt();
+		boolean flag=true;
+		while(flag) {
+			if(index>0&&index<10) {
+				if(board[index]==' ') {
+					System.out.println("The change can be made");
+					flag=false;
+				}else {
+					System.out.println("The position is already filled. Please enter a new position");
+				}
+			}else {
+				System.out.println("The index is not valid. Please enter a valid index");
+			}
 		}
 	}
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
-		char[][] newBoard = makeBoard();
+		char[] newBoard = makeBoard();
 		//taking the player's option
 		char playerOption=chooseOption();
 		char computerOption;
@@ -43,5 +70,8 @@ public class TicTacToeGame {
 		}
 		System.out.println("This is how current board looks like");
 		showBoard(newBoard);
+		
+		checkIndex(newBoard);
+		
 	}
 }
