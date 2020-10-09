@@ -339,6 +339,10 @@ public class TicTacToeGame {
 		if(checkWin(newBoard,computerOption, playerOption)) {
 			System.out.println("The game ended in a draw");
 		}
-		System.out.println("Will youlike toplay")
+		System.out.println("Will you like to play another game? Respond with 0 if you want to exit");
+		int choice = sc.nextInt();
+		if(choice!=0) {
+			System.out.println("Please start the game");
+		}
 	}
 }
