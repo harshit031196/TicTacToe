@@ -23,7 +23,7 @@ public class TicTacToeGame {
 	 */
 	public static char chooseOption() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Please choose between X and O");
+		System.out.println("Player, Please choose between X and O");
 		char c = sc.next().charAt(0);
 		return c;
 	}
@@ -76,6 +76,13 @@ public class TicTacToeGame {
 		}
 		return turn;
 	}
+	/**
+	 * @param board
+	 * @param computerOption
+	 * @param playerOption
+	 * @return
+	 * Returns if after any turn, either the player or the computer won or not
+	 */
 	public static boolean checkWin(char[] board, char computerOption, char playerOption) {
 		if((board[1]==playerOption&&board[2]==playerOption&&board[3]==playerOption)
 				||(board[4]==playerOption&&board[5]==playerOption&&board[6]==playerOption)
@@ -101,6 +108,90 @@ public class TicTacToeGame {
 		}
 		return true;
 	}
+	public static void playLikePlayer(char[] board, char playerOption, char computerOption) {
+		if(board[1]!=playerOption&&board[2]!=playerOption&&board[3]!=playerOption) {
+			if(board[1]==' ') {
+				board[1]=computerOption;
+			}else if(board[3]==' ') {
+				board[3]=computerOption;
+			}else if(board[2]==' ') {
+				board[2]=computerOption;
+			}
+			return;
+		}
+		
+		if(board[4]!=playerOption&&board[5]!=playerOption&&board[6]!=playerOption) {
+			if(board[6]==' ') {
+				board[6]=computerOption;
+			}else if(board[4]==' ') {
+				board[4]=computerOption;
+			}else if(board[5]==' ') {
+				board[5]=computerOption;
+			}
+			return;
+		}
+		if(board[7]!=playerOption&&board[8]!=playerOption&&board[9]!=playerOption) {
+			if(board[7]==' ') {
+				board[7]=computerOption;
+			}else if(board[9]==' ') {
+				board[9]=computerOption;
+			}else if(board[8]==' ') {
+				board[8]=computerOption;
+			}
+			return;
+		}
+		if(board[1]!=playerOption&&board[4]!=playerOption&&board[7]!=playerOption) {
+			if(board[1]==' ') {
+				board[1]=computerOption;
+			}else if(board[7]==' ') {
+				board[7]=computerOption;
+			}else if(board[4]==' ') {
+				board[4]=computerOption;
+			}
+			return;
+		}
+		if(board[2]!=playerOption&&board[5]!=playerOption&&board[8]!=playerOption) {
+			if(board[5]==' ') {
+				board[5]=computerOption;
+			}else if(board[2]==' ') {
+				board[2]=computerOption;
+			}else if(board[8]==' ') {
+				board[8]=computerOption;
+			}
+			return;
+		}
+		if(board[3]!=playerOption&&board[6]!=playerOption&&board[9]!=playerOption) {
+			if(board[3]==' ') {
+				board[3]=computerOption;
+			}else if(board[9]==' ') {
+				board[9]=computerOption;
+			}else if(board[6]==' ') {
+				board[6]=computerOption;
+			}
+			return;
+		}
+		if(board[1]!=playerOption&&board[5]!=playerOption&&board[9]!=playerOption) {
+			if(board[1]==' ') {
+				board[1]=computerOption;
+			}else if(board[9]==' ') {
+				board[9]=computerOption;
+			}else if(board[5]==' ') {
+				board[5]=computerOption;
+			}
+			return;
+		}
+		if(board[3]!=playerOption&&board[5]!=playerOption&&board[7]!=playerOption) {
+			if(board[3]==' ') {
+				board[3]=computerOption;
+			}else if(board[7]==' ') {
+				board[7]=computerOption;
+			}else if(board[5]==' ') {
+				board[5]=computerOption;
+			}
+			return;
+		}
+	}
+	
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
 		char[] newBoard = makeBoard();
@@ -112,16 +203,16 @@ public class TicTacToeGame {
 		}else {
 			computerOption='X';
 		}
-		System.out.println("Please enter the input");
-		char input = sc.next().charAt(0);
+//		System.out.println("Please enter the input");
+//		char input = sc.next().charAt(0);
 		//checking if the entered option is player's option or computer's option
-		if(input==playerOption) {
-			System.out.println("This is the player's option");
-		}else {
-			System.out.println("This is the computer's option");
-		}
-		System.out.println("This is how current board looks like");
-		showBoard(newBoard);
+//		if(input==playerOption) {
+//			System.out.println("This is the player's option");
+//		}else {
+//			System.out.println("This is the computer's option");
+//		}
+//		System.out.println("This is how current board looks like");
+//		showBoard(newBoard);
 //		checkIndex(newBoard,playerOption);
 //		showBoard(newBoard);
 		int start=playFirst();
@@ -129,12 +220,14 @@ public class TicTacToeGame {
 		
 		for(int i=0;i<9;i++) {
 			if(turn==playerTurn) {
+				System.out.println("Player please make your move");
 				checkIndex(newBoard,playerOption);
 				showBoard(newBoard);
 				if(!checkWin(newBoard,computerOption, playerOption))break;
 				turn++;
 				turn%=2;
 			}else if(turn==computerTurn) {
+				System.out.println("Computer please make your move");
 				checkIndex(newBoard,computerOption);
 				showBoard(newBoard);
 				if(!checkWin(newBoard,computerOption, playerOption))break;
@@ -142,5 +235,9 @@ public class TicTacToeGame {
 				turn%=2;
 			}
 		}
+		if(checkWin(newBoard,computerOption, playerOption)) {
+			System.out.println("The game ended in a draw");
+		}
+		System.out.println("Will youlike toplay")
 	}
 }
