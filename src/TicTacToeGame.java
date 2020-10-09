@@ -191,7 +191,108 @@ public class TicTacToeGame {
 			return;
 		}
 	}
-	
+	public static boolean blockOpponent(char[]board, char opponent, char self) {
+		int count=0;
+		if(board[1]==opponent&&board[2]==opponent&&board[3]==' ') {
+			board[3]=self;
+			return true;
+		}
+		if(board[1]==opponent&&board[3]==opponent&&board[2]==' ') {
+			board[2]=self;
+			return true;
+		}
+		if(board[2]==opponent&&board[3]==opponent&&board[1]==' ') {
+			board[1]=self;
+			return true;
+		}
+		if(board[4]==opponent&&board[5]==opponent&&board[6]==' ') {
+			board[6]=self;
+			return true;
+		}
+		if(board[5]==opponent&&board[6]==opponent&&board[4]==' ') {
+			board[4]=self;
+			return true;
+		}
+		if(board[4]==opponent&&board[6]==opponent&&board[5]==' ') {
+			board[5]=self;
+			flag=true;
+			return true;
+		}
+		if(board[7]==opponent&&board[8]==opponent&&board[9]==' ') {
+			board[9]=self;
+			flag=true;
+			return true;
+		}
+		if(board[7]==opponent&&board[9]==opponent&&board[8]==' ') {
+			board[8]=self;
+			return true;
+		}
+		if(board[9]==opponent&&board[8]==opponent&&board[7]==' ') {
+			board[7]=self;
+			return true;
+		}
+		if(board[1]==opponent&&board[4]==opponent&&board[7]==' ') {
+			board[7]=self;
+			return true;
+		}
+		if(board[1]==opponent&&board[7]==opponent&&board[4]==' ') {
+			board[4]=self;
+			return true;
+		}
+		if(board[4]==opponent&&board[7]==opponent&&board[1]==' ') {
+			board[1]=self;
+			return true;
+		}
+		if(board[2]==opponent&&board[5]==opponent&&board[8]==' ') {
+			board[8]=self;
+			return true;
+		}
+		if(board[2]==opponent&&board[8]==opponent&&board[5]==' ') {
+			board[5]=self;
+			return true;
+		}
+		if(board[5]==opponent&&board[8]==opponent&&board[2]==' ') {
+			board[2]=self;
+			return true;
+		}
+		if(board[3]==opponent&&board[6]==opponent&&board[9]==' ') {
+			board[9]=self;
+			return true;
+		}
+		if(board[3]==opponent&&board[9]==opponent&&board[6]==' ') {
+			board[6]=self;
+			return true;
+		}
+		if(board[6]==opponent&&board[9]==opponent&&board[3]==' ') {
+			board[3]=self;
+			return true;
+		}
+		if(board[1]==opponent&&board[5]==opponent&&board[9]==' ') {
+			board[9]=self;
+			return true;
+		}
+		if(board[1]==opponent&&board[9]==opponent&&board[5]==' ') {
+			board[5]=self;
+			return true;
+		}
+		if(board[5]==opponent&&board[9]==opponent&&board[1]==' ') {
+			board[1]=self;
+			return true;
+		}
+		if(board[3]==opponent&&board[5]==opponent&&board[7]==' ') {
+			board[7]=self;
+			return true;
+		}
+		if(board[3]==opponent&&board[7]==opponent&&board[5]==' ') {
+			board[5]=self;
+			return true;
+		}
+		if(board[5]==opponent&&board[7]==opponent&&board[3]==' ') {
+			board[3]=self;
+			return true;
+		}
+		return false;
+	}
 	public static void main(String []args) {
 		Scanner sc = new Scanner(System.in);
 		char[] newBoard = makeBoard();
